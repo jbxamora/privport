@@ -1,4 +1,3 @@
-1
 <div align="center">
     <a href="https://kronos.earth"><h1 align="center">kronos.earth</h1></a>
     
