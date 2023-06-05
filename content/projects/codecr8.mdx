@@ -1,0 +1,62 @@
+---
+title: CodeCrate
+description: Just Another Text Editor
+date: "2023-03-17"
+url: https://codecr8.netlify.app/
+repository: jbxamora/CodeCrate
+published: true
+  
+---
+
+# CodeCrate
+Just Another Text Editor. 
+
+## Installation
+
+To install head to the following website and hit install! Alternitavely you can use CodeCr8 straight from the browser!
+
+https://codecr8.netlify.app/
+
+## Code Snippets
+
+### Manifest
+
+```js
+new WebpackPwaManifest({ // Generates a manifest file for Progressive Web Apps
+        name: "JATE", // The name of the app
+        short_name: "JATE", // A short name for the app
+        description: "Just Another Text Editor!", // A description of the app
+        background_color: "#225ca3", // The background color of the app
+        theme_color: "#225ca3", // The color theme of the app
+        publicPath: "./",
+        start_url: "./", // The URL to open when the app is launched
+        icons: [ // An array of icon objects
+          {
+            src: path.resolve("src/images/logo.png"), // The path to the icon file
+            sizes: [96, 128, 192, 256, 384, 512], // The sizes of the icon file to generate
+            destination: path.join("assets", "icons"), // The directory to output the icon files
+          },
+        ],
+})
+
+```
+
+### IndexDB GET Function
+
+```js
+// GET function to retrieve all data from the database
+export const getDb = async () => {
+  console.log("Getting data from the jateDB");
+  // Connect to the database
+  const jateDb = await openDB("jate", 1);
+  // Create a new transaction with read-only privileges
+  const tx = jateDb.transaction("jate", "readonly");
+  // Open the object store
+  const objStore = tx.objectStore("jate");
+  // Use the .getAll() method to retrieve all content from the object store
+  const req = objStore.getAll();
+  // Wait for the request to complete and log the result
+  const res = await req;
+  console.log("data retrieved from the jateDB", res);
+};
+```

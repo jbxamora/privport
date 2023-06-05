@@ -1,0 +1,171 @@
+---
+title: "sqlTrackR"
+description: A powerful application that simplifies and streamlines your SQL database management. 
+date: "2022-02-26"
+repository: jbxamora/sqlTrackR
+published: true
+---
+# sqlTrackR
+
+With `sqlTrackR`, you'll be presented with several options when you start the application. You can choose to view all departments, view all roles, view all employees, add a department, add a role, add an employee, and update an employee role. No need to fumble through a bunch of different menus or pages - it's all right there for you to choose from.
+
+## Installation
+
+To install and run on your local machine, follow these steps:
+
+- Clone this repository to your local machine
+- Install the necessary dependencies with `npm install` or `npm i`
+- Start the application by typing `node app` in your terminal at the root of the folder
+
+**IF THERES NO DATA**
+
+In the terminal, use the following commands:
+- mysql -u root -p
+- Password: **`FakePassword`**
+- `CREATE DATABASE company_db`
+- `USE company_db`
+- `source path/to/schema`
+- `source path/to/seeds`
+
+**IF THERES ALREADY A DATABASE BUT NOTHING IS SHOWING**
+- mysql -u root -p
+- Password: **`FakePassword`**
+- **DROP DATABASE company_db**
+- `CREATE DATABASE company_db`
+- `USE company_db`
+- `source path/to/schema`
+- `source path/to/seeds`
+
+![Picture of App Logo](./assets/Screenshot%202023-02-26%20at%207.58.34%20PM.png)
+
+## Code Snippets
+
+### Update Employee Managers
+This function updates an employee's manager by first querying the employee and manager lists, prompting the user to select which employee's manager to update and their new manager, and then creating a temporary table to hold the employee IDs and full names before updating the employee's manager ID with the selected manager's ID. Once the update is complete, the temporary table is dropped and the user is returned to the main menu.
+```js
+function updateEmployeeManager() {
+  // Query employees to get a list of available employees
+  connection.query(
+    `SELECT CONCAT(first_name, ' ', last_name) AS employee FROM employee`,
+    function (err, res) {
+      if (err) throw err;
+
+      // Map the employee names to an array of employee choices
+      const employees = res.map((employee) => employee.employee);
+
+      // Query employees to get a list of available managers
+      connection.query(
+        `SELECT CONCAT(first_name, ' ', last_name) AS manager FROM employee`,
+        function (err, res) {
+          if (err) throw err;
+
+          // Map the manager names to an array of manager choices
+          const managers = res.map((manager) => manager.manager);
+
+          // Prompt the user for new employee details
+          inquirer
+            .prompt([
+              {
+                name: "employee",
+                type: "list",
+                message: "Which employee's manager would you like to update?",
+                choices: employees,
+              },
+              {
+                name: "manager",
+                type: "list",
+                message: "Who is the employee's new manager?",
+                choices: managers,
+              },
+            ])
+            .then((answer) => {
+              // Create a temporary table to hold the employee IDs and full names
+              connection.query(
+                `CREATE TEMPORARY TABLE temp_employee
+                    SELECT id, CONCAT(first_name, ' ', last_name) AS full_name
+                    FROM employee`,
+                function (err, res) {
+                  if (err) throw err;
+                  // Update the employee's manager ID
+                  connection.query(
+                    `UPDATE employee
+                            SET manager_id = (SELECT id FROM temp_employee WHERE full_name = ?)
+                            WHERE CONCAT(first_name, ' ', last_name) = ?`,
+                    [answer.manager, answer.employee],
+                    function (err, res) {
+                      if (err) throw err;
+                      console.log(
+                        colors.brightGreen("Employee manager updated!")
+                      );
+                      // Drop the temporary table
+                      connection.query(
+                        `DROP TEMPORARY TABLE temp_employee`,
+                        function (err, res) {
+                          if (err) throw err;
+                          start();
+                        }
+                      );
+                    }
+                  );
+                }
+              );
+            });
+        }
+      );
+    }
+  );
+}
+```
+
+### View Department Budget
+This function prompts the user to select a department and then queries the database to calculate and display the total utilized budget of that department, which is calculated as the sum of all salaries of employees who belong to that department.
+```js
+function viewBudget() {
+  // Query departments to get a list of available departments
+  connection.query(`SELECT name FROM department`, function (err, res) {
+    if (err) throw err;
+
+    // Map the department names to an array of department choices
+    const departments = res.map((department) => department.name);
+
+    // Prompt the user for the department to view the budget of
+    inquirer
+      .prompt([
+        {
+          name: "department",
+          type: "list",
+          message: "Which department's budget would you like to view?",
+          choices: departments,
+        },
+      ])
+      .then((answer) => {
+        // Query the total utilized budget of the department
+        connection.query(
+          `SELECT SUM(salary) AS budget FROM role
+                    INNER JOIN employee ON employee.role_id = role.id
+                    INNER JOIN department ON role.department_id = department.id
+                    WHERE department.name = ?`,
+          [answer.department],
+          function (err, res) {
+            if (err) throw err;
+            // Log the total utilized budget of the department
+            console.table(res);
+            start();
+          }
+        );
+      });
+  });
+}
+```
+
+@upstash/qstash is the official client and consumer for [QStash](https://chronark.com/projects/qstash).
+
+QStash is the message broker between your serverless apps. You send an HTTP
+request to QStash, that includes a destination, a payload and optional settings.
+We durably store your message and will deliver it to the destination API via
+HTTP. In case the destination is not ready to receive the message, we will retry
+the message later, to guarentee at-least-once delivery.
+
+```bash
+npm install @upstash/qstash
+```

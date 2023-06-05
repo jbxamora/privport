@@ -1,0 +1,129 @@
+---
+title: React Portfolio
+description: My old work portfolio built using React + Three.js
+date: "2023-03-01"
+url: https://react2jorge.com
+published: true
+repository: "chronark/highstorm"
+  
+---
+# React Portfolio
+
+Built using React.js + Three.js
+
+
+This is a portfolio I built from scratch meant to showcase skills, projects, work experience and my tech stack/ capabilities.
+
+## Code Snippets
+
+The code snippet is defining a React functional component called `BallCanvas`, which is responsible for rendering a 3D sphere with a texture image mapped onto it. The component is using the `Canvas` component from the `@react-three/fiber` library to create a WebGL canvas.
+
+The `frameloop` property of the `Canvas` component is set to `"demand"`, which means the canvas will only update when needed, resulting in better performance. The `dpr` property is set to `[1, 2]`, which defines the device pixel ratio, ensuring that the canvas looks sharp on high-resolution screens. The `gl` property is set to `{ preserveDrawingBuffer: true }`, which enables the canvas to be saved as an image.
+
+The component is using the `Suspense` component from React to provide a fallback component while the 3D model and texture are being loaded. Inside the `Suspense` component, the `OrbitControls` component from the `@react-three/drei` library is used to allow for rotating the 3D sphere. Finally, the `Ball` component is rendered with the `imgUrl` prop set to the `icon` value, which is the URL of the texture image.
+
+The `Preload` component from `@react-three/drei` is used to preload all assets, which can improve performance by reducing load times.
+
+```js
+// Define a BallCanvas component that renders a Canvas from @react-three/fiber
+const BallCanvas = ({ icon }) => {
+  return (
+    <Canvas
+      frameloop="demand"
+      dpr={[1, 2]}
+      gl={{ preserveDrawingBuffer: true }}
+    >
+      <Suspense fallback={<CanvasLoader />}>
+        {/* Add OrbitControls to allow for rotating the Ball */}
+        <OrbitControls enableZoom={false} />
+        {/* Render the Ball component, passing the icon prop as the texture URL */}
+        <Ball imgUrl={icon} />
+      </Suspense>
+
+      {/* Use Preload from drei to preload all assets */}
+      <Preload all />
+    </Canvas>
+  );
+};
+```
+Then
+
+```js
+const Tech = () => {
+  // Returning a flex container with each technology rendered as a BallCanvas component
+  return (
+    <div className="flex flex-row flex-wrap justify-center gap-10">
+      {technologies.map((technology) => (
+        <div className="w-28 h-28" key={technology.name}>
+          <BallCanvas icon={technology.icon} />
+        </div>
+      ))}
+    </div>
+  );
+};
+```
+
+### Earth
+The `EarthCanvas` component renders a 3D model of Earth using Three.js and the `useGLTF` hook from `@react-three/drei`. The `Canvas` element provides the Three.js rendering context and camera, and the `OrbitControls` component enables interactive camera controls. The `Earth` component loads the 3D model using the `useGLTF` hook and renders it using the `primitive` component.
+```js
+const Earth = () => {
+  const earth = useGLTF('./planet/scene.gltf');
+  return (
+    <primitive 
+    object={earth.scene}
+    scale={2.5}
+    position-y={0}
+    position-x={0}/>
+  )
+}
+
+const EarthCanvas = () => {
+  return (
+    <Canvas
+    shadows
+    frameloop='demand'
+    gl={{ preserveDrawingBuffer: true }}
+    camera={{
+      fov: 45,
+      near: 0.1,
+      far: 200,
+      position: [-4, 3, 6],
+     }}
+    >
+      <Suspense fallback={<CanvasLoader />}>
+        <OrbitControls 
+        autoRotate
+        enableZoom={false}
+        maxPolarAngle={Math.PI / 2}
+        minPolarAngle={Math.PI / 2} />
+        <Earth />
+        </Suspense>
+    </Canvas>
+  )
+}
+
+```
+## Tech Stack
+
+1. React
+2. TailWindCSS
+3. Custom Domain
+4. Accessability
+5. Three.js
+6. Email.js
+
+## Sources
+
+This project uses the following libraries and tools:
+
+- [Three.js](https://threejs.org/)
+- [Tailwind CSS](https://tailwindcss.com/docs/installation)
+- [React Render Props](https://reactjs.org/docs/render-props.html)
+- [Netlify](https://docs.netlify.com/get-started/)
+- [Vite](https://vitejs.dev/guide/)
+- [PostCSS](https://postcss.org/)
+- [JavaScript Mastery](https://www.jsmastery.pro/resources)
+- [Framer Motion](https://www.framer.com/motion/?utm_source=motion-readme-docs)
+- [Maath](https://www.npmjs.com/package/maath?activeTab=explore)
+- [React Three Fiber](https://docs.pmnd.rs/react-three-fiber/getting-started/introduction)
+- [Drei](https://github.com/pmndrs/drei)

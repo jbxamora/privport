@@ -1,0 +1,173 @@
+---
+title: "ThoughtsUp"
+description: A simple social network API I built during my time at UCB
+date: "2022-03-04"
+repository: jbxamora/ThoughtsUp
+published: true
+  
+---
+
+# ThoughtsUp
+
+ThoughtsUp is a social network API built using Express.js and MongoDB, which can handle large amounts of unstructured data. It offers a variety of features such as sharing thoughts, reacting to friend’s thoughts, and creating a friend list. It’s a great solution for social media startups as it offers flexibility in terms of data structure and handles large amounts of data effectively. It also offers API GET, POST, PUT, and DELETE routes to enable users to interact with the database, and the Mongoose ODM is used for database modeling. ThoughtsUp is perfect for developers looking to build social network APIs and require scalability and flexibility in their data structure.
+
+## Installation
+
+To install and run on your local machine, follow these steps:
+
+**Clone this repository to your local machine**
+
+`git clone <'REPOURL'>`
+
+**Install the necessary dependencies**
+
+`npm init -y`
+
+`npm i express`
+
+`npm i mongoose`
+
+**Seed The Database**
+
+`npm run seed`
+
+**Run the Application**
+
+`node server`
+
+## Code Snippets
+
+### Date Formatting
+
+This code exports a function that takes in a timestamp and an options object with properties monthLength and dateSuffix.
+The function formats the timestamp into a readable string format using the options provided.
+
+If the monthLength is set to `short`, the abbreviated month name is used in the format, otherwise the full month name is used.
+
+If `dateSuffix` is true, the day of the month is appended with a suffix like `st`, `nd`, `rd`, or `th`.
+
+The function first creates an object of month names based on the `monthLength` option provided, then creates a new `Date` object from the timestamp, and finally formats the date into a string using string concatenation.
+
+```js
+// Function to format a timestamp
+module.exports = (
+  timestamp,
+  { monthLength = "short", dateSuffix = true } = {}
+) => {
+  let months;
+
+  if (monthLength === "short") {
+    months = {
+      0: "Jan",
+      1: "Feb",
+      2: "Mar",
+      3: "Apr",
+      4: "May",
+      5: "Jun",
+      6: "Jul",
+      7: "Aug",
+      8: "Sep",
+      9: "Oct",
+      10: "Nov",
+      11: "Dec",
+    };
+  } else {
+    months = {
+      0: "January",
+      1: "February",
+      2: "March",
+      3: "April",
+      4: "May",
+      5: "June",
+      6: "July",
+      7: "August",
+      8: "September",
+      9: "October",
+      10: "November",
+      11: "December",
+    };
+  }
+
+  const dateObj = new Date(timestamp);
+  const formattedMonth = months[dateObj.getMonth()];
+
+  let dayOfMonth;
+
+  if (dateSuffix) {
+    dayOfMonth = addDateSuffix(dateObj.getDate());
+  } else {
+    dayOfMonth = dateObj.getDate();
+  }
+
+  const year = dateObj.getFullYear();
+
+  let hour;
+  // Check for 24-hr time
+  if (dateObj.getHours > 12) {
+    hour = Math.floor(dateObj.getHours() / 2);
+  } else {
+    hour = dateObj.getHours();
+  }
+  // If hour is 0 (12:00am), change it to 12
+  if (hour === 0) {
+    hour = 12;
+  }
+
+  const minutes = dateObj.getMinutes();
+
+  // Set `am` or `pm`
+  let periodOfDay;
+
+  if (dateObj.getHours() >= 12) {
+    periodOfDay = "pm";
+  } else {
+    periodOfDay = "am";
+  }
+
+  const formattedTimeStamp = `${formattedMonth} ${dayOfMonth}, ${year} at ${hour}:${minutes} ${periodOfDay}`;
+
+  return formattedTimeStamp;
+};
+```
+
+### Seeds
+
+This is an asynchronous function in JavaScript that is responsible for seeding the MongoDB database with data.
+
+The function first removes any existing data for the `Thoughts` and `User` models using the Mongoose's `deleteMany()` method.
+It then creates new data for these models using the Mongoose's `create()` method with the data defined in the thoughts and users arrays.
+
+After creating the new data, the function associates the thoughts with the users by iterating through the `createdThoughts` array and finding the user with the matching username.
+
+It pushes the `thought._id` into the user's thoughts array and saves the user. Finally, the function logs a success message to the console and disconnects from the database.
+
+```js
+const seedData = async () => {
+  try {
+    // Remove any existing data
+    await Thought.deleteMany({});
+    await User.deleteMany({});
+
+    // Create the new data
+    const createdUsers = await User.create(users);
+    const createdThoughts = await Thought.create(thoughts);
+
+    // Associate the thoughts with the users
+    for (let i = 0; i < createdThoughts.length; i++) {
+      const thought = createdThoughts[i];
+      const user = createdUsers.find(
+        (user) => user.username === thought.username
+      );
+      user.thoughts.push(thought._id);
+      await user.save();
+    }
+
+    console.log("Data seeding successful!");
+  } catch (error) {
+    console.error("Error seeding data:", error.message);
+  } finally {
+    // Disconnect from the database
+    mongoose.disconnect();
+  }
+};
+```
