@@ -1,5 +1,5 @@
 "use client";
-import { Github, Mail, Twitter, Instagram } from "lucide-react";
+import { Github, Mail, Twitter} from "lucide-react";
 import Link from "next/link";
 import { Navigation } from "../components/nav";
 import { Card } from "../components/card";
@@ -10,12 +10,6 @@ const socials = [
     href: "https://twitter.com/kronos_earth",
     label: "Twitter",
     handle: "@kronos_earth",
-  },
-  {
-    icon: <Instagram size={20} />,
-    href: "https://instagram.com/kronosearth",
-    label: "Instagram",
-    handle: "@kronosearth",
   },
   {
     icon: <Mail size={20} />,
