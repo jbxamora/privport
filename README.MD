@@ -22,6 +22,7 @@ Create a dotenv file with these variables
 UPSTASH_REDIS_REST_URL=
 UPSTASH_REDIS_REST_TOKEN=
 NEXT_PUBLIC_BEAM_TOKEN=
+GA_TRACKING_ID=google analytics
 ```
 
 Then install dependencies and run the development server:
