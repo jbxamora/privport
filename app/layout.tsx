@@ -3,10 +3,11 @@ import { Inter } from "@next/font/google";
 import LocalFont from "@next/font/local";
 import { Metadata } from "next";
 import { Analytics } from "./components/analytics";
+import { GoogleAnalytics } from "./components/googleanalytics";
 
 export const metadata: Metadata = {
   title: {
-    default: "kronos.earth",
+    default: "Kronos",
     template: "%s | kronos.earth",
   },
   description:
@@ -62,17 +63,18 @@ export default function RootLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<html lang="en" className={[inter.variable, calSans.variable].join(" ")}>
-			<head>
-				<Analytics />
-			</head>
-			<body
-				className={`bg-black ${
-					process.env.NODE_ENV === "development" ? "debug-screens" : undefined
-				}`}
-			>
-				{children}
-			</body>
-		</html>
-	);
+    <html lang="en" className={[inter.variable, calSans.variable].join(" ")}>
+      <head>
+        <GoogleAnalytics GA_TRACKING_ID={process.env.GA_TRACKING_ID} />
+        <Analytics />
+      </head>
+      <body
+        className={`bg-black ${
+          process.env.NODE_ENV === "development" ? "debug-screens" : undefined
+        }`}
+      >
+        {children}
+      </body>
+    </html>
+  );
 }
