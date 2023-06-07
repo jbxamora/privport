@@ -19,7 +19,7 @@ const socials = [
   },
   {
     icon: <Github size={20} />,
-    href: "https://github.com/jbxamora]]]",
+    href: "https://github.com/jbxamora",
     label: "Github",
     handle: "jbxamora",
   },
