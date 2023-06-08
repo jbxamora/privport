@@ -7,17 +7,17 @@ import { GoogleAnalytics } from "./components/googleanalytics";
 
 export const metadata: Metadata = {
   title: {
-    default: "Kronos",
+    default: "Kronos | Web Design & Development",
     template: "%s | kronos.earth",
   },
   description:
-    "Software engineer and CEO of kronos, a company that builds open source solutions for small businesses and startups.",
+    "A community of developers that build websites and open source solutions for small businesses and startups.",
   openGraph: {
-    title: "kronos.earth",
+    title: "Kronos | Web Design & Development",
     description:
-      "Software engineer and CEO of kronos, a company that builds open source solutions for small businesses and startups.",
+      " Specializing in the best personal websites and custom web design for small businesses, we bring your vision to life at affordable prices.",
     url: "https://kronos.earth",
-    siteName: "kronos.earth",
+    siteName: "Kronos",
     images: [
       {
         url: "https://kronos.earth/og.png",
