@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     },
   },
   twitter: {
-    title: "kronos",
+    title: "Kronos | Custom Web Design & Development",
     card: "summary_large_image",
   },
   icons: {
