@@ -41,16 +41,6 @@ export default function Home() {
             Hey, my name is Jorge. I build timeless websites and open source
             solutions for small businesses and startups.
             <br />
-            Im currently working on{" "}
-            <Link
-              target="_blank"
-              href="https://photoport.vercel.app"
-              className="underline duration-500 hover:text-zinc-300"
-            >
-              photoport,
-            </Link>{" "}
-            an image gallery meant to be used as a portfolio for photographers.
-
             Look forward to what's coming next!..
           </h2>
         </div>

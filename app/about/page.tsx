@@ -1,6 +1,6 @@
 "use client"
 import { Navigation } from "../components/nav";
-import { Card } from "../components/card";
+import { Card } from "../components/ui/card";
 import { Book, Users, CheckSquare, Sparkles, Split, User, Link  } from "lucide-react";
 
 const values = [
