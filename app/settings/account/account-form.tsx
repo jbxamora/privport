@@ -64,7 +64,7 @@ const accountFormSchema = z.object({
 
 type AccountFormValues = z.infer<typeof accountFormSchema>
 
-// This can come from your database or API.
+// This can come from the database or API.
 const defaultValues: Partial<AccountFormValues> = {
   // name: "Your name",
   // dob: new Date("2023-01-23"),
@@ -97,7 +97,7 @@ export function AccountForm() {
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
-                <Input placeholder="Your name" {...field} />
+                <Input placeholder="Your name" {...field} className="bg-transparent"/>
               </FormControl>
               <FormDescription>
                 This is the name that will be displayed on your profile and in
@@ -164,7 +164,7 @@ export function AccountForm() {
                       variant="outline"
                       role="combobox"
                       className={cn(
-                        "w-[200px] justify-between",
+                        "w-[200px] justify-between ",
                         !field.value && "text-muted-foreground"
                       )}
                     >
@@ -177,7 +177,7 @@ export function AccountForm() {
                     </Button>
                   </FormControl>
                 </PopoverTrigger>
-                <PopoverContent className="w-[200px] p-0">
+                <PopoverContent className="w-[200px] p-0 text-zinc-200 bg-black">
                   <Command>
                     <CommandInput placeholder="Search language..." />
                     <CommandEmpty>No language found.</CommandEmpty>
@@ -192,7 +192,7 @@ export function AccountForm() {
                         >
                           <Check
                             className={cn(
-                              "mr-2 h-4 w-4",
+                              "mr-2 h-4 w-4 text-zinc-200",
                               language.value === field.value
                                 ? "opacity-100"
                                 : "opacity-0"

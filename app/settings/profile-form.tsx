@@ -57,8 +57,8 @@ type ProfileFormValues = z.infer<typeof profileFormSchema>
 const defaultValues: Partial<ProfileFormValues> = {
   bio: "I own a computer.",
   urls: [
-    { value: "https://shadcn.com" },
-    { value: "http://twitter.com/shadcn" },
+    { value: "https://kronos.earth" },
+    { value: "http://twitter.com/kronos_earth" },
   ],
 }
 
@@ -95,7 +95,7 @@ export function ProfileForm() {
             <FormItem>
               <FormLabel>Username</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} />
+                <Input placeholder="kronosdev" {...field} className="bg-transparent "/>
               </FormControl>
               <FormDescription>
                 This is your public display name. It can be your real name or a
@@ -117,7 +117,7 @@ export function ProfileForm() {
                     <SelectValue placeholder="Select a verified email to display" />
                   </SelectTrigger>
                 </FormControl>
-                <SelectContent>
+                <SelectContent className="bg-black text-zinc-200">
                   <SelectItem value="m@example.com">m@example.com</SelectItem>
                   <SelectItem value="m@google.com">m@google.com</SelectItem>
                   <SelectItem value="m@support.com">m@support.com</SelectItem>
@@ -125,7 +125,7 @@ export function ProfileForm() {
               </Select>
               <FormDescription>
                 You can manage verified email addresses in your{" "}
-                <Link href="/examples/forms">email settings</Link>.
+                <Link href="/settings/profile">email settings</Link>.
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -167,7 +167,7 @@ export function ProfileForm() {
                     Add links to your website, blog, or social media profiles.
                   </FormDescription>
                   <FormControl>
-                    <Input {...field} />
+                    <Input {...field} className="bg-transparent"/>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
