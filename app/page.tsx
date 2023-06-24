@@ -38,11 +38,10 @@ export default function Home() {
         <div className="hidden w-screen h-px animate-glow md:block animate-fade-right bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
         <div className="my-16 text-center animate-fade-in">
           <h2 className="text-sm text-zinc-500 ">
-            Hey, my name is Jorge. I build timeless websites and open source
-            solutions for small businesses and startups.
-            <br />
-            Look forward to what's coming next!..
+            A community of developers that seek growth and opportunity through collaboration with like-minded individuals.
           </h2>
+          <br />
+          Building timeless projects and solutions
         </div>
       </div>
       <Analytics />

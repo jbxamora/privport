@@ -1,5 +1,4 @@
 import Link from "next/link";
-import React from "react";
 import { allProjects } from "contentlayer/generated";
 import { Navigation } from "../components/nav";
 import { Card } from "../components/ui/card";
