@@ -13,7 +13,7 @@ type Props = {
 
 	views: number;
 };
-export const Header: React.FC<Props> = ({ project, views }) => {
+export const ShowcaseHeader: React.FC<Props> = ({ project, views }) => {
 	const ref = useRef<HTMLElement>(null);
 	const [isIntersecting, setIntersecting] = useState(true);
 
