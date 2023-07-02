@@ -1,8 +1,7 @@
 import Link from "next/link";
-import React from "react";
 import { allProjects } from "contentlayer/generated";
 import { Navigation } from "../components/nav";
-import { Card } from "../components/card";
+import { Card } from "../components/ui/card";
 import { Article } from "./article";
 import { Redis } from "@upstash/redis";
 import { Eye } from "lucide-react";
@@ -45,10 +44,10 @@ export default async function ProjectsPage() {
 			<div className="px-6 pt-16 mx-auto space-y-8 max-w-7xl lg:px-8 md:space-y-16 md:pt-24 lg:pt-32">
 				<div className="max-w-2xl mx-auto lg:mx-0">
 					<h2 className="text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl">
-						Projects
+						Featured Projects
 					</h2>
 					<p className="mt-4 text-zinc-400">
-						My web development work and some AI/ML projects.
+						Check out some of the most popular projects.
 					</p>
 				</div>
 				<div className="w-full h-px bg-zinc-800" />
@@ -87,7 +86,7 @@ export default async function ProjectsPage() {
 									{featured.description}
 								</p>
 								<div className="absolute bottom-4 md:bottom-8">
-									<p className="hidden text-zinc-200 hover:text-zinc-50 lg:block">
+									<p className="hidden text-zinc-200 hover:text-zinc-500 lg:block">
 										Read more <span aria-hidden="true">&rarr;</span>
 									</p>
 								</div>

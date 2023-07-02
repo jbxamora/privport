@@ -6,7 +6,7 @@ import { Analytics } from "@vercel/analytics/react";
 const navigation = [
   { name: "Projects", href: "/projects" },
   { name: "Contact", href: "/contact" },
-  { name: "About", href: "/about" },
+  // { name: "About", href: "/about" },
 ];
 
 export default function Home() {
@@ -38,20 +38,11 @@ export default function Home() {
         <div className="hidden w-screen h-px animate-glow md:block animate-fade-right bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
         <div className="my-16 text-center animate-fade-in">
           <h2 className="text-sm text-zinc-500 ">
-            Hey, my name is Jorge. I build timeless websites and open source
-            solutions for small businesses and startups.
-            <br />
-            Im currently working on{" "}
-            <Link
-              target="_blank"
-              href="https://photoport.vercel.app"
-              className="underline duration-500 hover:text-zinc-300"
-            >
-              photoport,
-            </Link>{" "}
-            an image gallery meant to be used as a portfolio for photographers.
-
-            Look forward to what's coming next!..
+            A community of developers that seek growth and opportunity through collaboration with like-minded individuals.
+          </h2>
+          <br />
+          <h2 className="text-sm text-zinc-500 ">
+          Building timeless projects and solutions
           </h2>
         </div>
       </div>

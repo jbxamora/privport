@@ -1,46 +1,47 @@
 "use client"
 import { Navigation } from "../components/nav";
-import { Card } from "../components/card";
-import { Book, Users, CheckSquare, Sparkles, Split, User, Link  } from "lucide-react";
+import { Card } from "../components/ui/card";
+import { Book, Users, CheckSquare, Sparkles, Split, User  } from "lucide-react";
+import Link from "next/link";
 
 const values = [
   {
-    icon: <Book size={10} />,
+    icon: <Book size={20} />,
     label: "Peer - Peer ",
     body: "lorem ipsum dolor sit amet consectetur adipiscing elit",
   },
   {
-    icon: <Users size={10} />,
+    icon: <Users size={20} />,
     label: "Network",
     body: "lorem ipsum dolor sit amet consectetur adipiscing elit a",
   },
   {
-    icon: <CheckSquare size={10} />,
+    icon: <CheckSquare size={20} />,
     label: "New Solutions",
     body: "lorem ipsum dolor sit amet consectetur adipiscing elit b",
   },
   {
-    icon: <Sparkles size={10} />,
+    icon: <Sparkles size={20} />,
     label: "Spotlight",
     body: "lorem ipsum dolor sit amet consectetur adipiscing elit c",
   },
   {
-    icon: <Split size={10} />,
+    icon: <Split size={20} />,
     label: "Continuous Growth",
     body: "lorem ipsum dolor sit amet consectetur adipiscing elit d",
   },
   {
-    icon: <User size={10} />,
+    icon: <User size={20} />,
     label: "Community",
     body: "lorem ipsum dolor sit amet consectetur adipiscing elit e",
   },
 ];
 export default function Example() {
   return (
-    <div className="relative lg:pt-1 pb-16 bg-gradient-to-tl from-zinc-900/0 via-zinc-900 to-zinc-900/0">
+    <div className="lg:pt-1 pb-16 items-center text-center bg-gradient-to-tl from-zinc-900/0 via-zinc-900 to-zinc-900/0">
       <Navigation />
-      <div className="px-6 pt-16 mx-auto space-y-8 max-w-7xl lg:px-8 md:space-y-16 md:pt-24 lg:pt-32">
-        <div className="max-w-2xl mx-auto lg:mx-0">
+      <div className="pt-10 mx-auto space-y-8 max-w-7xl lg:px-8">
+        <div className=" mx-auto lg:mx-0 mt-10 pt-10">
           <h2 className="text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl">
             Our Initiative
           </h2>
@@ -53,26 +54,11 @@ export default function Example() {
         </div>
         <div className="w-full h-px bg-zinc-800" />
       </div>
-
-      <div className="px-6 pt-16 ml-auto space-y-8 max-w-7xl lg:px-8 md:space-y-16 md:pt-24 lg:pt-32 text-right">
-        <div className="max-w-2xl mx-auto lg:mx-0">
-          <h2 className="text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl">
-            Our Values
-          </h2>
-          <h3 className="mt-4 text-zinc-400">
-            We offer a unique blend of services and opportunities that cater to
-            the needs of our diverse community. Our value lies in the unique
-            confluence of learning, networking, exposure, and growth we provide
-            for our community members.{" "}
-          </h3>
-        </div>
-        <div className="w-full h-px bg-zinc-800" />
-      </div>
-
-      <div className="container flex items-center justify-center min-h-screen px-4 mx-auto">
-        <div className="grid w-full grid-cols-1 gap-8 mx-auto mt-32 sm:mt-0 sm:grid-cols-3 lg:gap-16">
+<br />
+      <div className="container flex items-center text-center justify-center min-h-screen px-4 mx-auto">
+        <div className="grid w-full grid-cols-1 gap-8 mx-auto mt-2 sm:mt-0 sm:grid-cols-3 lg:gap-16">
           {values.map((v) => (
-            <Card>
+            <Card key={v.label}>
               <Link
                 href={""}
                 target="_blank"

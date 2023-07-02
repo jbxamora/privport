@@ -118,7 +118,7 @@ const components = {
 	tr: ({ className, ...props }: React.HTMLAttributes<HTMLTableRowElement>) => (
 		<tr
 			className={clsx(
-				"m-0 border-t border-zinc-300 p-0 even:bg-zinc-100",
+				"m-0 border-t border-zinc-300 p-0 even:bg-zinc-200",
 				className,
 			)}
 			{...props}
