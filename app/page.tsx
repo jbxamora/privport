@@ -6,7 +6,7 @@ import { Analytics } from "@vercel/analytics/react";
 const navigation = [
   { name: "Projects", href: "/projects" },
   { name: "Contact", href: "/contact" },
-  { name: "About", href: "/about" },
+  // { name: "About", href: "/about" },
 ];
 
 export default function Home() {
@@ -41,7 +41,9 @@ export default function Home() {
             A community of developers that seek growth and opportunity through collaboration with like-minded individuals.
           </h2>
           <br />
+          <h2 className="text-sm text-zinc-500 ">
           Building timeless projects and solutions
+          </h2>
         </div>
       </div>
       <Analytics />
