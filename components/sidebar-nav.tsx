@@ -20,7 +20,8 @@ export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
     <nav
       className={cn(
         "flex space-x-2 lg:flex-col lg:space-x-0 lg:space-y-1",
-        className
+        className,
+        "overflow-x-auto whitespace-no-wrap" //horizontal scrolling
       )}
       {...props}
     >
